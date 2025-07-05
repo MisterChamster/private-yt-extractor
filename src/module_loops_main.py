@@ -1,5 +1,5 @@
 import os
-from .module_askers_common import ask_url
+from .module_askers import ask_url
 from .module_big_routes import extract_plist_data
 from .module_utils import determine_url_type
 

@@ -7,8 +7,8 @@ from .module_utils import (char_police,
                            dots,
                            illegal_to_ascii,
                            is_internet_available)
-from .module_askers_extract import (ask_extract_write_order,
-                                    ask_round_or_exact)
+from .module_askers import (ask_extract_write_order,
+                            ask_round_or_exact)
 
 
 
