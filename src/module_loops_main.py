@@ -1,7 +1,7 @@
 import os
 from .module_askers import ask_url
 from .module_extract import extract_plist_data
-from .module_utils import determine_url_type
+from .module_utils import is_url_playlist
 
 
 
@@ -11,9 +11,7 @@ def main_loop():
         os.chdir(desktop_path)
         print()
         url = ask_url()
-        url_type = determine_url_type(url)
-
-        if url_type == 'plist':
+        if is_url_playlist(url):
             print()
             extract_plist_data(url)
         else:
