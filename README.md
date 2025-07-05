@@ -1,1 +1,1 @@
-# yt-extracter
+# yt-extractor
