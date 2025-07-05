@@ -10,15 +10,12 @@ def main_loop():
         desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
         os.chdir(desktop_path)
         print()
+        print("======================================================")
+        print("============== Welcome to yt extractor! ==============")
+        print("======================================================\n")
         url = ask_url()
         if is_url_playlist(url):
             print()
             extract_plist_data(url)
         else:
             print("Invalid input!\n")
-
-        again = " "
-        while again not in ["", "y", "e"]:
-            again = input("\nWhat now? (Enter - run program again, e - end program)\n>>").lower()
-        if again == "e":
-            break

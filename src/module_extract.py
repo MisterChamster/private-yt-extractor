@@ -67,7 +67,7 @@ def extract_plist_data(plist_url):
             else:
                 print("Something went wrong")
 
-    print("Data is extracted and it's almost time to write everything to a file\n")
+    # print("Data is extracted and it's almost time to write everything to a file\n")
     plist_len = plist_dict['playlist_count']
 
     if write_order == "asc":
