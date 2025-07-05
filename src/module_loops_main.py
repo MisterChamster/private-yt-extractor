@@ -1,8 +1,6 @@
 import os
-from .module_askers_common import (ask_url,
-                                   ask_plist_action)
-from .module_big_routes import (save_plist,
-                                extract_plist_data)
+from .module_askers_common import ask_url
+from .module_big_routes import extract_plist_data
 from .module_utils import determine_url_type
 
 
@@ -17,13 +15,7 @@ def main_loop():
 
         if url_type == 'plist':
             print()
-            url_type = ask_plist_action()
-            if url_type == 'download':
-                print()
-                save_plist(url)
-            elif url_type == 'extract':
-                print()
-                extract_plist_data(url)
+            extract_plist_data(url)
         else:
             print("Invalid input!\n")
 
