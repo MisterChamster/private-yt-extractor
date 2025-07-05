@@ -1,5 +1,5 @@
 def ask_url():
-    print("Enter URL: \n>> ", end="")
+    print("Enter playlist URL to extract data from: \n>> ", end="")
     url = str(input())
     if '&list=' in url:
         url = url[:url.find('&list=')]
@@ -29,7 +29,7 @@ def ask_round_or_exact():
     """
     input_RE = " "
     RE_dict = {"": "round", "r": "round", "e": "exact"}
-    input_RE = input("Do You want viewcount on every video be exact or rounded? Extracting exact values will take significantly longer time. (Enter - rounded, e - exact)\n>>").lower()
+    input_RE = input("Do You want viewcount on every video be exact or rounded? Extracting exact values will take more time. (Enter - rounded, e - exact)\n>>").lower()
 
     if input_RE in RE_dict:
         return RE_dict[input_RE]
