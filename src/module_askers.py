@@ -35,5 +35,8 @@ def ask_extract_write_order():
     order = ""
     result_dict = {"a": "asc", "d": "desc"}
     while order not in result_dict:
-        order = input("In what order do You want to write elements to file? (a - ascending, d - descending)\n>>" )
+        print("Choose order of writing elements to file:\n" \
+              "a - ascending " \
+              "d - descending\n\n>> ", end="")
+        order = str(input())
     return result_dict[order]

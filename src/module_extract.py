@@ -48,7 +48,9 @@ def extract_plist_data(plist_url):
     dir_name += "_extracts"
     
     round_or_exact = ask_round_or_exact()
+    print()
     write_order = ask_extract_write_order()
+    print()
     if round_or_exact == "round":
         plist_list = [[el["url"], el["title"], el["view_count"]] for el in plist_dict['entries']]
     elif round_or_exact == "exact":
@@ -65,7 +67,7 @@ def extract_plist_data(plist_url):
             else:
                 print("Something went wrong")
 
-    print("Data is extracted and it's almost time to write everything to a file")
+    print("Data is extracted and it's almost time to write everything to a file\n")
     plist_len = plist_dict['playlist_count']
 
     if write_order == "asc":
