@@ -2,8 +2,8 @@
 
 ## Installation
 ```bash
-git clone https://github.com/MisterChamster/private-yt-download.git
-cd private-yt-download
+git clone https://github.com/MisterChamster/private-yt-extractor.git
+cd private-yt-extractor
 ```
 
 ## Usage
