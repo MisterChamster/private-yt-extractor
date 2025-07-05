@@ -1,5 +1,11 @@
 # yt-extractor
 
+## Installation
+```bash
+git clone https://github.com/MisterChamster/private-yt-download.git
+cd private-yt-download
+```
+
 ## Usage
 ```bash
 #Windows
