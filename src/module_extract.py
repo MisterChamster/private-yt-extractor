@@ -95,16 +95,17 @@ def extract_plist_data(plist_url):
     chdir(dir_name)
 
     with open(filename + ".txt", "w") as f:
-        f.write(f"Playlist name: \t\t\t{plist_title}\n")
-        f.write(f"Playlist's url:\t\t\t{plist_dict['original_url']}\n")
-        f.write(f"Playlist's owner: \t\t{plist_dict['channel']}\n")
-        f.write(f"Owner's URL: \t\t\t{plist_dict['channel_url']}\n")
         modified_date = plist_dict['modified_date']
         modified_date = modified_date[-2:] + "." + modified_date[4:6] + "." + modified_date[:4]
-        f.write(f"Playlist last updated on: \t{modified_date}\n")
-        f.write(f"Time of this data extract: \t{calendarium}, {current_time} \n")
-        f.write(f"Playlist views so far: \t\t{dots(plist_dict['view_count'])}\n")
-        f.write(f"Current playlist length: \t{plist_len}\n\n\n\n")
+
+        f.write(f"Playlist name:             {plist_title}\n")
+        f.write(f"Playlist's url:            {plist_dict['original_url']}\n")
+        f.write(f"Playlist's owner:          {plist_dict['channel']}\n")
+        f.write(f"Owner's URL:               {plist_dict['channel_url']}\n")
+        f.write(f"Playlist last updated on:  {modified_date}\n")
+        f.write(f"Time of this data extract: {calendarium}, {current_time} \n")
+        f.write(f"Playlist views so far:     {dots(plist_dict['view_count'])}\n")
+        f.write(f"Current playlist length:   {plist_len}\n\n\n\n")
         print("Downloading...")
         
         for index in range(start_index, end_index, 1-2*(end_index==-1)):
@@ -124,6 +125,7 @@ def extract_plist_data(plist_url):
             f.write("\n\n\n\n\nNo errors have occurred during extraction")
         else:
             f.write(f"\n\n\n\n\nNumber of errors during extraction: {total_errors}")
+        f.write("\n")
     
     print("\n" + plist_title + " data has been successfully extracted to Your desktop!")
     if total_errors == 0:
