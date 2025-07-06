@@ -1,4 +1,12 @@
 # yt-extractor
+Program dedicated for squeezing info from YouTube playlists into a text file. Originally a part of YT-Downloader project.
+
+## Features
+- Extracting playlist data trom YouTube
+- Customization
+- Mega quick
+- Mega easy to use
+- Mega lightweight
 
 ## Installation
 ```bash
@@ -21,3 +29,6 @@ source venv/bin/activate
 pip install -r requirements.txt
 python3 main.py
 ```
+
+## Additional notes
+It's a personal project, but all are welcome to use it!
