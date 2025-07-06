@@ -17,5 +17,7 @@ def main_loop():
         if is_url_playlist(url):
             print()
             extract_plist_data(url)
+        elif url == "exit":
+            return
         else:
             print("Invalid input!\n")

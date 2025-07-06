@@ -1,10 +1,11 @@
 def ask_url():
-    print("Enter playlist URL to extract data from: \n>> ", end="")
+    print("Enter playlist URL to extract data from:\n" \
+          "(to exit input 'exit')\n" \
+          ">> ", end="")
     url = str(input())
     if '&list=' in url:
         url = url[:url.find('&list=')]
     return url
-
 
 
 def ask_round_or_exact():
