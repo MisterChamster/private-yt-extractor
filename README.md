@@ -1,5 +1,5 @@
-# yt-extractor
-Program dedicated for squeezing info from YouTube playlists into a text file. Originally a part of YT-Downloader project.
+# YT Extractor
+Program dedicated for squeezing info from YouTube playlists into a text file. Originally a part of YT Downloader project.
 
 ## Features
 - Extracting playlist data trom YouTube
