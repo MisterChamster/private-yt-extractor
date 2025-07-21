@@ -10,8 +10,8 @@ Program dedicated for squeezing info from YouTube playlists into a text file. Or
 
 ## Installation
 ```bash
-git clone https://github.com/MisterChamster/private-yt-extractor.git
-cd private-yt-extractor
+git clone https://github.com/MisterChamster/private-yt-extractor.git yt-extractor
+cd yt-extractor
 ```
 
 ## Usage
