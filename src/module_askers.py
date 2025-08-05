@@ -34,10 +34,16 @@ def ask_extract_write_order():
         string: "asc" or "desc".
     """
     order = ""
-    result_dict = {"a": "asc", "d": "desc"}
-    while order not in result_dict:
+    result_dict = {"a": "asc",
+                   "d": "desc"}
+
+    while True:
         print("Choose order of writing elements to file:\n" \
-              "a - ascending\n" \
-              "d - descending\n\n>> ", end="")
-        order = str(input())
-    return result_dict[order]
+              "a - Ascending\n" \
+              "d - Descending\n\n>> ", end="")
+        asker = input()
+
+        if asker in result_dict:
+            return result_dict[order]
+        else:
+            print("Incorrect input.\n\n")
