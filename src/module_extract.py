@@ -52,9 +52,11 @@ def extract_plist_data(plist_url):
     write_order = ask_extract_write_order()
     print()
     if round_or_exact == "round":
-        plist_list = [[el["url"], el["title"], el["view_count"]] for el in plist_dict['entries']]
+        # for elytra in plist_dict['entries']:
+        #     print(elytra["duration"])
+        plist_list = [[el["url"], el["title"], None, el["view_count"]] for el in plist_dict['entries']]
     elif round_or_exact == "exact":
-        plist_list = [[el["url"], el["title"]] for el in plist_dict['entries']] 
+        plist_list = [[el["url"], el["title"], None] for el in plist_dict['entries']] 
         try:
             for el in plist_list:
                 with YoutubeDL(ydl_getdata) as ydl:
@@ -114,7 +116,7 @@ def extract_plist_data(plist_url):
 
             try:
                 f.write(f"{index + 1}. {plist_list[pop_index][1]}\n")
-                f.write(f"Views: {dots(plist_list[pop_index][2])}\n")
+                f.write(f"Views: {dots(plist_list[pop_index][3])}\n")
                 f.write(f"{plist_list[pop_index][0]}\n\n") #URL
             except:
                 total_errors += 1
