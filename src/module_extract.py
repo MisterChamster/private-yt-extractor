@@ -83,13 +83,13 @@ def extract_plist_data(plist_url):
         third_quart = ceil(plist_len/4)
         pop_index   = -1
 
-    halfway         = ceil(plist_len/2)
-    quart_dict      = {first_quart: "One quarter down, three to go", halfway: "We're halfway there!", third_quart: "Just one more quarter..."}
-    total_errors    = 0
-    calendarium     = str(datetime.date.today())
-    current_time    = strftime("%H:%M:%S", localtime())
-    filename        = dir_name + "_extract_" + calendarium[:4] + calendarium[5:7] + calendarium[8:10] + current_time[:2] + current_time[3:5] + current_time[6:8] + write_order
-    total_duration  = 0
+    halfway        = ceil(plist_len/2)
+    quart_dict     = {first_quart: "One quarter down, three to go", halfway: "We're halfway there!", third_quart: "Just one more quarter..."}
+    total_errors   = 0
+    calendarium    = str(datetime.date.today())
+    current_time   = strftime("%H:%M:%S", localtime())
+    filename       = dir_name + "_extract_" + calendarium[:4] + calendarium[5:7] + calendarium[8:10] + current_time[:2] + current_time[3:5] + current_time[6:8] + write_order
+    total_duration = 0
 
     if not path.exists(desktop_path + "/" + dir_name):
         mkdir(dir_name)
@@ -102,6 +102,7 @@ def extract_plist_data(plist_url):
         for index in range(start_index, end_index, 1-2*(end_index==-1)):
             vid_data = plist_list[pop_index]
             total_duration += vid_data[2]
+        time_format = str(datetime.timedelta(seconds=total_duration))
 
         f.write(f"Playlist name:               {plist_title}\n")
         f.write(f"Playlist's url:              {plist_dict['original_url']}\n")
@@ -111,7 +112,7 @@ def extract_plist_data(plist_url):
         f.write(f"Time of this data extract:   {calendarium}, {current_time}\n")
         f.write(f"Playlist views so far:       {dots(plist_dict['view_count'])}\n")
         f.write(f"Current playlist length:     {plist_len}\n")
-        f.write(f"Current videos added length: {total_duration}\n\n\n\n")
+        f.write(f"Current videos added length: {time_format}\n\n\n\n")
         print("Downloading...")
 
 
