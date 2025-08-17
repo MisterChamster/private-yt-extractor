@@ -104,15 +104,15 @@ def extract_plist_data(plist_url):
             total_duration += vid_data[2]
         time_format = str(datetime.timedelta(seconds=total_duration))
 
-        f.write(f"Playlist name:               {plist_title}\n")
-        f.write(f"Playlist's url:              {plist_dict['original_url']}\n")
-        f.write(f"Playlist's owner:            {plist_dict['channel']}\n")
-        f.write(f"Owner's URL:                 {plist_dict['channel_url']}\n")
-        f.write(f"Playlist last updated on:    {modified_date}\n")
-        f.write(f"Time of this data extract:   {calendarium}, {current_time}\n")
-        f.write(f"Playlist views so far:       {dots(plist_dict['view_count'])}\n")
-        f.write(f"Current playlist length:     {plist_len}\n")
-        f.write(f"Current videos added length: {time_format}\n\n\n\n")
+        f.write(f"Playlist name:                {plist_title}\n")
+        f.write(f"Playlist's url:               {plist_dict['original_url']}\n")
+        f.write(f"Playlist's owner:             {plist_dict['channel']}\n")
+        f.write(f"Owner's URL:                  {plist_dict['channel_url']}\n")
+        f.write(f"Playlist last updated on:     {modified_date}\n")
+        f.write(f"Time of this data extract:    {calendarium}, {current_time}\n")
+        f.write(f"Playlist views so far:        {dots(plist_dict['view_count'])}\n")
+        f.write(f"Current playlist length:      {plist_len}\n")
+        f.write(f"Current videos added length:  {time_format}\n\n\n\n")
         print("Downloading...")
 
 
