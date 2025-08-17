@@ -1,7 +1,7 @@
 from yt_dlp import YoutubeDL
 from os import chdir, mkdir, path
 from math import ceil
-from datetime import date
+import datetime
 from time import localtime, strftime
 from .module_utils import (char_police,
                            dots,
@@ -86,7 +86,7 @@ def extract_plist_data(plist_url):
     halfway         = ceil(plist_len/2)
     quart_dict      = {first_quart: "One quarter down, three to go", halfway: "We're halfway there!", third_quart: "Just one more quarter..."}
     total_errors    = 0
-    calendarium     = str(date.today())
+    calendarium     = str(datetime.date.today())
     current_time    = strftime("%H:%M:%S", localtime())
     filename        = dir_name + "_extract_" + calendarium[:4] + calendarium[5:7] + calendarium[8:10] + current_time[:2] + current_time[3:5] + current_time[6:8] + write_order
     total_duration  = 0
