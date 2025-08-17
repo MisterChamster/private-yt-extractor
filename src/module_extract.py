@@ -52,11 +52,9 @@ def extract_plist_data(plist_url):
     write_order = ask_extract_write_order()
     print()
     if round_or_exact == "round":
-        # for elytra in plist_dict['entries']:
-        #     print(elytra["duration"])
-        plist_list = [[el["url"], el["title"], None, el["view_count"]] for el in plist_dict['entries']]
+        plist_list = [[el["url"], el["title"], el["duration"], el["view_count"]] for el in plist_dict['entries']]
     elif round_or_exact == "exact":
-        plist_list = [[el["url"], el["title"], None] for el in plist_dict['entries']] 
+        plist_list = [[el["url"], el["title"], el["duration"]] for el in plist_dict['entries']] 
         try:
             for el in plist_list:
                 with YoutubeDL(ydl_getdata) as ydl:
@@ -91,6 +89,7 @@ def extract_plist_data(plist_url):
     calendarium     = str(date.today())
     current_time    = strftime("%H:%M:%S", localtime())
     filename        = dir_name + "_extract_" + calendarium[:4] + calendarium[5:7] + calendarium[8:10] + current_time[:2] + current_time[3:5] + current_time[6:8] + write_order
+    total_duration  = 0
 
     if not path.exists(desktop_path + "/" + dir_name):
         mkdir(dir_name)
@@ -100,6 +99,10 @@ def extract_plist_data(plist_url):
         modified_date = plist_dict['modified_date']
         modified_date = modified_date[-2:] + "." + modified_date[4:6] + "." + modified_date[:4]
 
+        for index in range(start_index, end_index, 1-2*(end_index==-1)):
+            vid_data = plist_list[pop_index]
+            total_duration += vid_data[2]
+
         f.write(f"Playlist name:             {plist_title}\n")
         f.write(f"Playlist's url:            {plist_dict['original_url']}\n")
         f.write(f"Playlist's owner:          {plist_dict['channel']}\n")
@@ -107,15 +110,17 @@ def extract_plist_data(plist_url):
         f.write(f"Playlist last updated on:  {modified_date}\n")
         f.write(f"Time of this data extract: {calendarium}, {current_time}\n")
         f.write(f"Playlist views so far:     {dots(plist_dict['view_count'])}\n")
-        f.write(f"Current playlist length:   {plist_len}\n\n\n\n")
+        f.write(f"Current playlist length:   {plist_len}\n")
+        f.write(f"Current videos added length: {total_duration}\n\n\n\n")
         print("Downloading...")
-        
+
+
         for index in range(start_index, end_index, 1-2*(end_index==-1)):
             if index in quart_dict:
                 print(quart_dict.pop(index))
 
+            vid_data = plist_list[pop_index]
             try:
-                vid_data = plist_list[pop_index]
                 f.write(f"{index + 1}. {vid_data[1]}\n")
                 f.write(f"Views: {dots(vid_data[3])}\n")
                 f.write(f"{vid_data[0]}\n\n") #URL
