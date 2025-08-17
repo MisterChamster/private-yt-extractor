@@ -94,7 +94,7 @@ def extract_plist_data(plist_url):
         mkdir(dir_name)
     chdir(dir_name)
 
-    with open(filename + ".txt", "w") as f:
+    with open(filename + ".txt", "w", encoding="utf-8") as f:
         modified_date = plist_dict['modified_date']
         modified_date = modified_date[-2:] + "." + modified_date[4:6] + "." + modified_date[:4]
 
@@ -103,7 +103,7 @@ def extract_plist_data(plist_url):
         f.write(f"Playlist's owner:          {plist_dict['channel']}\n")
         f.write(f"Owner's URL:               {plist_dict['channel_url']}\n")
         f.write(f"Playlist last updated on:  {modified_date}\n")
-        f.write(f"Time of this data extract: {calendarium}, {current_time} \n")
+        f.write(f"Time of this data extract: {calendarium}, {current_time}\n")
         f.write(f"Playlist views so far:     {dots(plist_dict['view_count'])}\n")
         f.write(f"Current playlist length:   {plist_len}\n\n\n\n")
         print("Downloading...")
