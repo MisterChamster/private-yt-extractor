@@ -33,7 +33,6 @@ def ask_extract_write_order():
     Returns:
         string: "asc" or "desc".
     """
-    order = ""
     result_dict = {"a": "asc",
                    "d": "desc"}
 
@@ -44,6 +43,6 @@ def ask_extract_write_order():
         asker = input()
 
         if asker in result_dict:
-            return result_dict[order]
+            return result_dict[asker]
         else:
             print("Incorrect input.\n\n")
