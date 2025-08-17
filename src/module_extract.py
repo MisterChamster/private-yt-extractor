@@ -115,12 +115,13 @@ def extract_plist_data(plist_url):
                 print(quart_dict.pop(index))
 
             try:
-                f.write(f"{index + 1}. {plist_list[pop_index][1]}\n")
-                f.write(f"Views: {dots(plist_list[pop_index][3])}\n")
-                f.write(f"{plist_list[pop_index][0]}\n\n") #URL
+                vid_data = plist_list[pop_index]
+                f.write(f"{index + 1}. {vid_data[1]}\n")
+                f.write(f"Views: {dots(vid_data[3])}\n")
+                f.write(f"{vid_data[0]}\n\n") #URL
             except:
                 total_errors += 1
-                f.write(f"{plist_len - index}. An error has occurred when trying to download data of a video with URL: {plist_list[pop_index]}\n\n")
+                f.write(f"{plist_len - index}. An error has occurred when trying to download data of a video with URL: {vid_data[0]}\n\n")
             plist_list.pop(pop_index)
 
         if total_errors == 0:
