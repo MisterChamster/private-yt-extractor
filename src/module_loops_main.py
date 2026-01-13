@@ -14,10 +14,11 @@ def main_loop():
         print("============== Welcome to yt extractor! ==============")
         print("======================================================\n")
         url = ask_url()
+
+        if not url:
+            return
         if is_url_playlist(url):
             print()
             extract_plist_data(url)
-        elif url == "exit":
-            return
         else:
-            print("Invalid input!\n")
+            print("Invalid input!\n\n")

@@ -1,10 +1,12 @@
 def ask_url():
-    print("Enter playlist URL to extract data from:\n" \
-          "(to exit input 'exit')\n" \
-          ">> ", end="")
-    url = str(input())
-    if '&list=' in url:
-        url = url[:url.find('&list=')]
+    print("Enter playlist URL to extract data from:")
+    print("(to exit input 'exit')\n>> ", end="")
+    asker = input().strip()
+
+    if asker == "exit":
+        return
+    if '&list=' in asker:
+        url = asker[:asker.find('&list=')]
     return url
 
 
@@ -15,15 +17,15 @@ def ask_round_or_exact():
     Returns:
         str: "round" or "exact".
     """
-    input_RE = " "
-    RE_dict = {"r": "round", "e": "exact"}
-    print("Choose view count type (exact values will take more time):\n" \
-          "r - rounded\n" \
-          "e - exact\n\n>> ", end="")
-    input_RE = str(input())
+    returns_dict = {"r": "round", "e": "exact"}
 
-    if input_RE in RE_dict:
-        return RE_dict[input_RE]
+    print("Choose view count type (exact values will take more time):")
+    print("r - Rounded")
+    print("e - Exact\n>> ", end="")
+    asker = input().strip().lower()
+
+    if asker in returns_dict:
+        return returns_dict[asker]
 
 
 def ask_extract_write_order():
@@ -33,16 +35,16 @@ def ask_extract_write_order():
     Returns:
         string: "asc" or "desc".
     """
-    result_dict = {"a": "asc",
-                   "d": "desc"}
+    returns_dict = {"a": "asc",
+                    "d": "desc"}
 
     while True:
-        print("Choose order of writing elements to file:\n" \
-              "a - Ascending\n" \
-              "d - Descending\n\n>> ", end="")
-        asker = input()
+        print("Choose order of writing elements to file:")
+        print("a - Ascending")
+        print("d - Descending\n>> ", end="")
+        asker = input().strip().lower()
 
-        if asker in result_dict:
-            return result_dict[asker]
+        if asker in returns_dict:
+            return returns_dict[asker]
         else:
             print("Incorrect input.\n\n")
