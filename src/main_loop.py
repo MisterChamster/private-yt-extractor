@@ -6,7 +6,7 @@ import src.utils         as utils
 
 
 
-def main_loop():
+def main_loop() -> None:
     while True:
         desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
         os.chdir(desktop_path)

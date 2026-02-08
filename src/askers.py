@@ -1,7 +1,7 @@
-def ask_url():
     print("Enter playlist URL to extract data from:")
     print("(to exit input 'exit')\n>> ", end="")
     asker = input().strip()
+def ask_url() -> str | None:
 
     if asker == "exit":
         return
@@ -10,7 +10,7 @@ def ask_url():
     return url
 
 
-def ask_round_or_exact():
+def ask_round_or_exact() -> str:
     """
     Asks user if extracted video views should be exact or rounded.
 
@@ -28,7 +28,7 @@ def ask_round_or_exact():
         return returns_dict[asker]
 
 
-def ask_extract_write_order():
+def ask_extract_write_order() -> str:
     """
     Asks user for extract order.
 

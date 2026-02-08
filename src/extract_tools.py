@@ -9,7 +9,7 @@ import src.askers as askers
 
 
 
-def extract_plist_data(plist_url):
+def extract_plist_data(plist_url: str) -> None:
     """
     Extracts data from a playlist to a file.
 
