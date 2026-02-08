@@ -1,7 +1,7 @@
 import os
-from .askers import ask_url
-from .extract_tools import extract_plist_data
-from .utils import is_url_playlist
+from src.askers import ask_url
+from src.extract_tools import extract_plist_data
+from src.utils import is_url_playlist
 
 
 
