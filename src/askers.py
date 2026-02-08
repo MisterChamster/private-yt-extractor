@@ -1,13 +1,19 @@
-    print("Enter playlist URL to extract data from:")
-    print("(to exit input 'exit')\n>> ", end="")
-    asker = input().strip()
 def ask_url() -> str | None:
+    while True:
+        print("Enter playlist URL to extract data from:\n"
+            "(to exit input 'exit')\n>> ", end="")
+        asker = input().strip()
 
-    if asker == "exit":
-        return
-    if '&list=' in asker:
-        url = asker[:asker.find('&list=')]
-    return url
+        if asker == "exit":
+            return
+
+        elif not "?list" in asker:
+            print("Invalid link!\n\n")
+
+        else:
+            if '&list=' in asker:
+                url = asker[:asker.find('&list=')]
+            return url
 
 
 def ask_round_or_exact() -> str:
