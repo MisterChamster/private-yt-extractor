@@ -1,18 +1,15 @@
 from yt_dlp import YoutubeDL
-from os import chdir, mkdir, path
-from math import ceil
+from os     import chdir, mkdir, path
+from math   import ceil
+from time   import localtime, strftime
 import datetime
-from time import localtime, strftime
-from .module_utils import (char_police,
-                           dots,
-                           illegal_to_ascii,
-                           is_internet_available)
-from .module_askers import (ask_extract_write_order,
-                            ask_round_or_exact)
+
+import src.utils  as utils
+import src.askers as askers
 
 
 
-def extract_plist_data(plist_url):
+def extract_plist_data(plist_url: str) -> None:
     """
     Extracts data from a playlist to a file.
 
@@ -35,21 +32,21 @@ def extract_plist_data(plist_url):
         with YoutubeDL(ydl_getdata) as ydl:
             plist_dict = ydl.extract_info(plist_url, download=False)
     except:
-        if not is_internet_available():
+        if not utils.is_internet_available():
             print("Internet connection failed.\n\n")
             return
         else:
             print("Something went wrong")
 
     plist_title = plist_dict['title']
-    dir_name = char_police(plist_title)
+    dir_name = utils.char_police(plist_title)
     if dir_name == "":
-        dir_name = illegal_to_ascii(plist_title)
+        dir_name = utils.illegal_to_ascii(plist_title)
     dir_name += "_extracts"
     
-    round_or_exact = ask_round_or_exact()
+    round_or_exact = askers.ask_round_or_exact()
     print()
-    write_order = ask_extract_write_order()
+    write_order = askers.ask_extract_write_order()
     print()
     if round_or_exact == "round":
         plist_list = [[el["url"], el["title"], el["duration"], el["view_count"]] for el in plist_dict['entries']]
@@ -61,7 +58,7 @@ def extract_plist_data(plist_url):
                     temp_vid_dict = ydl.extract_info(el[0], download=False)
                 el.append(temp_vid_dict["view_count"])
         except:
-            if not is_internet_available():
+            if not utils.is_internet_available():
                 print("Internet connection failed.\n\n")
                 return
             else:
@@ -110,7 +107,7 @@ def extract_plist_data(plist_url):
         f.write(f"Owner's URL:                  {plist_dict['channel_url']}\n")
         f.write(f"Playlist last updated on:     {modified_date}\n")
         f.write(f"Time of this data extract:    {calendarium}, {current_time}\n")
-        f.write(f"Playlist views so far:        {dots(plist_dict['view_count'])}\n")
+        f.write(f"Playlist views so far:        {utils.dots(plist_dict['view_count'])}\n")
         f.write(f"Current playlist length:      {plist_len}\n")
         f.write(f"Current videos added length:  {time_format}\n\n\n\n")
         print("Downloading...")
@@ -123,7 +120,7 @@ def extract_plist_data(plist_url):
             vid_data = plist_list[pop_index]
             try:
                 f.write(f"{index + 1}. {vid_data[1]}\n")
-                f.write(f"Views: {dots(vid_data[3])}\n")
+                f.write(f"Views: {utils.dots(vid_data[3])}\n")
                 f.write(f"{vid_data[0]}\n\n") #URL
             except:
                 total_errors += 1

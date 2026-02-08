@@ -2,29 +2,29 @@ from socket import create_connection
 
 
 
-def is_url_playlist(url):
+def is_url_playlist(url: str) -> bool:
     if (len(url) > 34 and url[:34] == 'https://youtube.com/playlist?list='):
         return True
     return False
 
 
-def is_internet_available():
+def is_internet_available() -> bool:
     """
     Checks internet availability.
 
     Returns:
-        True:   Internet is available.
-        False:  Internet is not available
+        True:  Internet is available.
+        False: Internet is not available.
     """
     try:
         create_connection(("www.google.com", 80))
         return True
     except OSError:
-        pass
+        return False
     return False
 
 
-def char_police(suspect_string):
+def char_police(suspect_string: str) -> str:
     """
     Checks for chars that are illegal in naming a file.
 
@@ -49,12 +49,12 @@ def char_police(suspect_string):
     return policedstring
 
 
-def illegal_to_ascii(illegal_string):
+def illegal_to_ascii(illegal_string: str) -> str:
     print("Why in the world did You do it? Maybe do something better with Your life than downloading stuff containing just illegal signs?")
     return "_".join((str(ord(char)) for char in illegal_string))
 
 
-def dots(integer):
+def dots(num: int) -> str:
     """
     Puts dots in long numbers.
 
@@ -66,11 +66,11 @@ def dots(integer):
     Returns:
         str: Inputted integer with dots added.
     """
-    integer = str(integer)
+    num = str(num)
     result = ''
-    while len(integer) > 3:
-        result = "." + integer[-3:] + result
-        integer = integer[:-3]
+    while len(num) > 3:
+        result = "." + num[-3:] + result
+        num = num[:-3]
 
-    result = integer + result 
+    result = num + result
     return result
