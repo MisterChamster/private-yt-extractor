@@ -28,6 +28,7 @@ def extract_plist_data(plist_url: str) -> None:
                    'extract_flat': True,
                    'force_generic_extractor': True}
     desktop_path = path.join(path.expanduser("~"), "Desktop")
+
     try:
         with YoutubeDL(ydl_getdata) as ydl:
             plist_dict = ydl.extract_info(plist_url, download=False)
@@ -43,11 +44,12 @@ def extract_plist_data(plist_url: str) -> None:
     if dir_name == "":
         dir_name = utils.illegal_to_ascii(plist_title)
     dir_name += "_extracts"
-    
+
     round_or_exact = askers.ask_round_or_exact()
     print()
     write_order = askers.ask_extract_write_order()
     print()
+
     if round_or_exact == "round":
         plist_list = [[el["url"], el["title"], el["duration"], el["view_count"]] for el in plist_dict['entries']]
     elif round_or_exact == "exact":
@@ -73,7 +75,7 @@ def extract_plist_data(plist_url: str) -> None:
         first_quart = ceil(plist_len/4)
         third_quart = ceil((plist_len/4)*3)
         pop_index   = 0
-    else:
+    elif write_order == "desc":
         start_index = plist_len - 1
         end_index   = -1
         first_quart = ceil((plist_len/4)*3)
