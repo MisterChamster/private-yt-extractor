@@ -19,9 +19,9 @@ def ask_round_or_exact() -> str:
     """
     returns_dict = {"r": "round", "e": "exact"}
 
-    print("Choose view count type (exact values will take more time):")
-    print("r - Rounded")
-    print("e - Exact\n>> ", end="")
+    print("Choose view count type (exact values will take more time):\n"
+          "r - Rounded\n"
+          "e - Exact\n>> ", end="")
     asker = input().strip().lower()
 
     if asker in returns_dict:
@@ -35,13 +35,14 @@ def ask_extract_write_order() -> str:
     Returns:
         string: "asc" or "desc".
     """
-    returns_dict = {"a": "asc",
-                    "d": "desc"}
+    returns_dict = {
+        "a": "asc",
+        "d": "desc"}
 
     while True:
-        print("Choose order of writing elements to file:")
-        print("a - Ascending")
-        print("d - Descending\n>> ", end="")
+        print("Choose order of writing elements to file:\n"
+              "a - Ascending\n"
+              "d - Descending\n>> ", end="")
         asker = input().strip().lower()
 
         if asker in returns_dict:
