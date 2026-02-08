@@ -13,8 +13,8 @@ def is_internet_available() -> bool:
     Checks internet availability.
 
     Returns:
-        True:   Internet is available.
-        False:  Internet is not available
+        True:  Internet is available.
+        False: Internet is not available.
     """
     try:
         create_connection(("www.google.com", 80))
