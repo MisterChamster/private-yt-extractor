@@ -24,5 +24,6 @@ def main_loop() -> None:
         if utils.is_url_playlist(url):
             print()
             extracts.extract_plist_data(url, save_dir_path)
+            print()
         else:
             print("Invalid input!\n\n")

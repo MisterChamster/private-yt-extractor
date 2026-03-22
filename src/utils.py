@@ -44,7 +44,7 @@ def char_police(suspect_string: str) -> str:
             charlist.pop(i)
         else:
             i += 1
-    
+
     policedstring = "".join(charlist)
     return policedstring
 

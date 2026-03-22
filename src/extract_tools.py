@@ -1,6 +1,6 @@
 from yt_dlp  import YoutubeDL
 from pathlib import Path
-from os      import chdir, mkdir, path
+from os      import mkdir
 from math    import ceil
 from time    import localtime, strftime
 import datetime
@@ -28,9 +28,6 @@ def extract_plist_data(plist_url: str, save_path: Path) -> None:
     ydl_getdata = {'quiet': True,
                    'extract_flat': True,
                    'force_generic_extractor': True}
-    # TEMPPPPP
-    chdir(save_path)
-    save_path = str(save_path)
 
     try:
         with YoutubeDL(ydl_getdata) as ydl:
@@ -54,9 +51,18 @@ def extract_plist_data(plist_url: str, save_path: Path) -> None:
     print()
 
     if round_or_exact == "round":
-        plist_list = [[el["url"], el["title"], el["duration"], el["view_count"]] for el in plist_dict['entries']]
+        plist_list = [[
+            el["url"],
+            el["title"],
+            el["duration"],
+            el["view_count"]]
+            for el in plist_dict['entries']]
     elif round_or_exact == "exact":
-        plist_list = [[el["url"], el["title"], el["duration"]] for el in plist_dict['entries']] 
+        plist_list = [[
+            el["url"],
+            el["title"],
+            el["duration"]]
+            for el in plist_dict['entries']]
         try:
             for el in plist_list:
                 with YoutubeDL(ydl_getdata) as ydl:
@@ -104,15 +110,20 @@ def extract_plist_data(plist_url: str, save_path: Path) -> None:
                       write_order)
     total_duration = 0
 
-    if not path.exists(save_path + "/" + dir_name):
-        mkdir(dir_name)
-    chdir(dir_name)
+    final_path = save_path / dir_name
+    if not final_path.exists():
+        mkdir(final_path)
 
-    with open(filename + ".txt", "w", encoding="utf-8") as f:
+    filename_ext = filename + ".txt"
+    text_file_path = final_path / filename_ext
+    with open(text_file_path, "w", encoding="utf-8") as f:
         modified_date = plist_dict['modified_date']
         modified_date = modified_date[-2:] + "." + modified_date[4:6] + "." + modified_date[:4]
 
-        for index in range(start_index, end_index, 1-2*(end_index==-1)):
+        step = 1-2*(end_index==-1)
+        for index in range(start_index,
+                           end_index,
+                           step):
             vid_data = plist_list[pop_index]
             total_duration += vid_data[2]
         time_format = str(datetime.timedelta(seconds=total_duration))
@@ -149,7 +160,7 @@ def extract_plist_data(plist_url: str, save_path: Path) -> None:
             f.write(f"\n\n\n\n\nNumber of errors during extraction: {total_errors}")
         f.write("\n")
     
-    print("\n" + plist_title + " data has been successfully extracted to Your desktop!")
+    print(f"\n{plist_title} data has been successfully extracted to Your desktop!")
     if total_errors == 0:
         print("No errors have occurred during extraction")
     else:

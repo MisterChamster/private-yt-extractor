@@ -12,8 +12,8 @@ def ask_url() -> str | None:
 
         else:
             if '&list=' in asker:
-                url = asker[:asker.find('&list=')]
-            return url
+                asker = asker[:asker.find('&list=')]
+            return asker
 
 
 def ask_round_or_exact() -> str:
