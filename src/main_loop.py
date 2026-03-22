@@ -1,19 +1,23 @@
 import os
+from pathlib import Path
 
+import src.utils         as utils
 import src.askers        as askers
 import src.extract_tools as extracts
-import src.utils         as utils
 
 
+
+proj_path = Path(__file__).resolve().parent
+extracted_dir_path = proj_path / "extracted"
+print(extracted_dir_path)
 
 def main_loop() -> None:
     while True:
-        desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
-        os.chdir(desktop_path)
         print()
-        print("======================================================")
-        print("============== Welcome to yt extractor! ==============")
-        print("======================================================\n")
+        print("======================================================\n"
+              "============== Welcome to yt extractor! ==============\n"
+              "======================================================\n")
+        os.chdir(extracted_dir_path)
         url = askers.ask_url()
 
         if not url:
