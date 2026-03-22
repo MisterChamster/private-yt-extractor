@@ -1,7 +1,8 @@
-from yt_dlp import YoutubeDL
-from os     import chdir, mkdir, path
-from math   import ceil
-from time   import localtime, strftime
+from yt_dlp  import YoutubeDL
+from pathlib import Path
+from os      import mkdir
+from math    import ceil
+from time    import localtime, strftime
 import datetime
 
 import src.utils  as utils
@@ -9,7 +10,7 @@ import src.askers as askers
 
 
 
-def extract_plist_data(plist_url: str) -> None:
+def extract_plist_data(plist_url: str, save_path: Path) -> None:
     """
     Extracts data from a playlist to a file.
 
@@ -27,7 +28,6 @@ def extract_plist_data(plist_url: str) -> None:
     ydl_getdata = {'quiet': True,
                    'extract_flat': True,
                    'force_generic_extractor': True}
-    desktop_path = path.join(path.expanduser("~"), "Desktop")
 
     try:
         with YoutubeDL(ydl_getdata) as ydl:
@@ -51,9 +51,18 @@ def extract_plist_data(plist_url: str) -> None:
     print()
 
     if round_or_exact == "round":
-        plist_list = [[el["url"], el["title"], el["duration"], el["view_count"]] for el in plist_dict['entries']]
+        plist_list = [[
+            el["url"],
+            el["title"],
+            el["duration"],
+            el["view_count"]]
+            for el in plist_dict['entries']]
     elif round_or_exact == "exact":
-        plist_list = [[el["url"], el["title"], el["duration"]] for el in plist_dict['entries']] 
+        plist_list = [[
+            el["url"],
+            el["title"],
+            el["duration"]]
+            for el in plist_dict['entries']]
         try:
             for el in plist_list:
                 with YoutubeDL(ydl_getdata) as ydl:
@@ -83,22 +92,38 @@ def extract_plist_data(plist_url: str) -> None:
         pop_index   = -1
 
     halfway        = ceil(plist_len/2)
-    quart_dict     = {first_quart: "One quarter down, three to go", halfway: "We're halfway there!", third_quart: "Just one more quarter..."}
+    quart_dict     = {
+        first_quart: "One quarter down, three to go",
+        halfway: "We're halfway there!",
+        third_quart: "Just one more quarter..."}
     total_errors   = 0
     calendarium    = str(datetime.date.today())
     current_time   = strftime("%H:%M:%S", localtime())
-    filename       = dir_name + "_extract_" + calendarium[:4] + calendarium[5:7] + calendarium[8:10] + current_time[:2] + current_time[3:5] + current_time[6:8] + write_order
+    filename       = (dir_name +
+                      "_extract_" +
+                      calendarium[:4] +
+                      calendarium[5:7] +
+                      calendarium[8:10] +
+                      current_time[:2] +
+                      current_time[3:5] +
+                      current_time[6:8] +
+                      write_order)
     total_duration = 0
 
-    if not path.exists(desktop_path + "/" + dir_name):
-        mkdir(dir_name)
-    chdir(dir_name)
+    final_path = save_path / dir_name
+    if not final_path.exists():
+        mkdir(final_path)
 
-    with open(filename + ".txt", "w", encoding="utf-8") as f:
+    filename_ext = filename + ".txt"
+    text_file_path = final_path / filename_ext
+    with open(text_file_path, "w", encoding="utf-8") as f:
         modified_date = plist_dict['modified_date']
         modified_date = modified_date[-2:] + "." + modified_date[4:6] + "." + modified_date[:4]
 
-        for index in range(start_index, end_index, 1-2*(end_index==-1)):
+        step = 1-2*(end_index==-1)
+        for index in range(start_index,
+                           end_index,
+                           step):
             vid_data = plist_list[pop_index]
             total_duration += vid_data[2]
         time_format = str(datetime.timedelta(seconds=total_duration))
@@ -135,7 +160,7 @@ def extract_plist_data(plist_url: str) -> None:
             f.write(f"\n\n\n\n\nNumber of errors during extraction: {total_errors}")
         f.write("\n")
     
-    print("\n" + plist_title + " data has been successfully extracted to Your desktop!")
+    print(f"\n{plist_title} data has been successfully extracted to Your desktop!")
     if total_errors == 0:
         print("No errors have occurred during extraction")
     else:

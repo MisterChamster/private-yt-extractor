@@ -8,6 +8,21 @@ def is_url_playlist(url: str) -> bool:
     return False
 
 
+def clean_url(in_url: str) -> str:
+    bad_stuff = ['&list', #If user copies browser link when on vid from playlist
+                '&si',   #ID tracker lmao
+                '?si',
+                '&ab_channel', #A/B testing
+                '&feature',    #How opened
+                '&pp',         #Promotion
+                '&t']          #Time stamp
+
+    for el in bad_stuff:
+        if el in in_url:
+            in_url = in_url[:in_url.find(el)]
+    return in_url
+
+
 def is_internet_available() -> bool:
     """
     Checks internet availability.
@@ -44,7 +59,7 @@ def char_police(suspect_string: str) -> str:
             charlist.pop(i)
         else:
             i += 1
-    
+
     policedstring = "".join(charlist)
     return policedstring
 
