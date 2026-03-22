@@ -1,7 +1,8 @@
-from yt_dlp import YoutubeDL
-from os     import chdir, mkdir, path
-from math   import ceil
-from time   import localtime, strftime
+from yt_dlp  import YoutubeDL
+from pathlib import Path
+from os      import chdir, mkdir, path
+from math    import ceil
+from time    import localtime, strftime
 import datetime
 
 import src.utils  as utils
@@ -9,7 +10,7 @@ import src.askers as askers
 
 
 
-def extract_plist_data(plist_url: str) -> None:
+def extract_plist_data(plist_url: str, save_path: Path) -> None:
     """
     Extracts data from a playlist to a file.
 
@@ -27,7 +28,9 @@ def extract_plist_data(plist_url: str) -> None:
     ydl_getdata = {'quiet': True,
                    'extract_flat': True,
                    'force_generic_extractor': True}
-    desktop_path = path.join(path.expanduser("~"), "Desktop")
+    # TEMPPPPP
+    chdir(save_path)
+    save_path = str(save_path)
 
     try:
         with YoutubeDL(ydl_getdata) as ydl:
@@ -83,14 +86,25 @@ def extract_plist_data(plist_url: str) -> None:
         pop_index   = -1
 
     halfway        = ceil(plist_len/2)
-    quart_dict     = {first_quart: "One quarter down, three to go", halfway: "We're halfway there!", third_quart: "Just one more quarter..."}
+    quart_dict     = {
+        first_quart: "One quarter down, three to go",
+        halfway: "We're halfway there!",
+        third_quart: "Just one more quarter..."}
     total_errors   = 0
     calendarium    = str(datetime.date.today())
     current_time   = strftime("%H:%M:%S", localtime())
-    filename       = dir_name + "_extract_" + calendarium[:4] + calendarium[5:7] + calendarium[8:10] + current_time[:2] + current_time[3:5] + current_time[6:8] + write_order
+    filename       = (dir_name +
+                      "_extract_" +
+                      calendarium[:4] +
+                      calendarium[5:7] +
+                      calendarium[8:10] +
+                      current_time[:2] +
+                      current_time[3:5] +
+                      current_time[6:8] +
+                      write_order)
     total_duration = 0
 
-    if not path.exists(desktop_path + "/" + dir_name):
+    if not path.exists(save_path + "/" + dir_name):
         mkdir(dir_name)
     chdir(dir_name)
 

@@ -8,8 +8,8 @@ import src.extract_tools as extracts
 
 
 proj_path = Path(__file__).resolve().parent
-extracted_dir_path = proj_path / "extracted"
-print(extracted_dir_path)
+save_dir_path = proj_path / "extracted"
+print(save_dir_path)
 
 def main_loop() -> None:
     while True:
@@ -17,13 +17,12 @@ def main_loop() -> None:
         print("======================================================\n"
               "============== Welcome to yt extractor! ==============\n"
               "======================================================\n")
-        os.chdir(extracted_dir_path)
         url = askers.ask_url()
 
         if not url:
             return
         if utils.is_url_playlist(url):
             print()
-            extracts.extract_plist_data(url)
+            extracts.extract_plist_data(url, save_dir_path)
         else:
             print("Invalid input!\n\n")
