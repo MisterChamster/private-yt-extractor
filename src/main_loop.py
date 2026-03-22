@@ -18,9 +18,14 @@ def main_loop() -> None:
               "============== Welcome to yt extractor! ==============\n"
               "======================================================\n")
         url = askers.ask_url()
-
         if not url:
             return
+
+        cleaned_url = utils.clean_url(url)
+        if cleaned_url != url:
+            url = cleaned_url
+            print("Your link has been cleaned of fluff.")
+
         if utils.is_url_playlist(url):
             print()
             extracts.extract_plist_data(url, save_dir_path)
