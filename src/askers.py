@@ -1,7 +1,7 @@
 def ask_url() -> str | None:
     while True:
         print("Enter playlist URL to extract data from:\n"
-              "(input 'e' to exit)\n>> ", end="")
+              "(input 'x' to exit)\n>> ", end="")
         asker = input().strip()
 
         if asker == "e":
