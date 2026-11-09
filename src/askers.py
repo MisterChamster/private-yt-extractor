@@ -4,7 +4,7 @@ def ask_url() -> str | None:
               "(input 'x' to exit)\n>> ", end="")
         asker = input().strip()
 
-        if asker == "e":
+        if asker == "x":
             return
 
         elif not "?list" in asker:
